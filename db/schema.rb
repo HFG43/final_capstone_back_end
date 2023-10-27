@@ -15,12 +15,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_27_213236) do
   enable_extension "plpgsql"
 
   create_table "experiences", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.decimal "experience_fee"
-    t.decimal "add_testing_fee"
-    t.decimal "reserve_full_table"
-    t.integer "guests"
+    t.string "name", null: false
+    t.text "description", null: false
+    t.decimal "experience_fee", null: false
+    t.decimal "add_testing_fee", null: false
+    t.decimal "reserve_full_table", null: false
+    t.integer "guests", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -28,8 +28,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_27_213236) do
   create_table "reservations", force: :cascade do |t|
     t.bigint "users_id", null: false
     t.bigint "experiences_id", null: false
-    t.datetime "date"
-    t.string "city"
+    t.datetime "date", null: false
+    t.string "city", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["experiences_id"], name: "index_reservations_on_experiences_id"
@@ -37,7 +37,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_27_213236) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
+    t.string "name", null: false
+    t.string "username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
