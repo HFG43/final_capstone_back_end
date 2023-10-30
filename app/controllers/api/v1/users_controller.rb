@@ -1,6 +1,6 @@
-class Api::UsersController < ApplicationController
+class Api::V1::UsersController < ApplicationController
   def show
-    user = User.find_by(username: params[:username])
+    user = User.find_by(username: params[:id])
     if user.nil?
       render json: { exist: false }
     else
