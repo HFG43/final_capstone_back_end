@@ -9,7 +9,7 @@ class Api::V1::ReservationsController < ApplicationController
 
     user_id = json_request['user_id']
     experience_id = json_request['experience_id']
-    
+
     user = User.find(user_id)
     experience = Experience.find(experience_id)
     date = json_request['date']
