@@ -4,7 +4,7 @@ class Api::V1::UsersController < ApplicationController
     if user.nil?
       render json: { exist: false }
     else
-      render json: { exist: true }
+      render json: { exist: true, id:user.id, name: user.name, username: user.username }
     end
   end
 
