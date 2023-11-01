@@ -4,7 +4,7 @@ RSpec.describe 'Reservations', type: :request do
   describe 'GET /api/v1/users/:user_id/reservations' do
     before do
       user = FactoryBot.create(:user)
-      @reservations = FactoryBot.create_list(:reservation, 5, user: user)
+      @reservations = FactoryBot.create_list(:reservation, 5, user:)
       get "/api/v1/users/#{user.id}/reservations"
     end
 
@@ -26,7 +26,9 @@ RSpec.describe 'Reservations', type: :request do
     end
 
     context 'with valid parameters' do
-      let(:valid_reservation_data) { { user_id: @user.id, experience_id: @experience.id, date: '2023-10-31',  city: 'New York'} }
+      let(:valid_reservation_data) do
+        { user_id: @user.id, experience_id: @experience.id, date: '2023-10-31', city: 'New York' }
+      end
 
       it 'creates a new reservation and responds with a success status: 201' do
         post "/api/v1/users/#{@user.id}/reservations", params: valid_reservation_data.to_json
@@ -40,7 +42,7 @@ RSpec.describe 'Reservations', type: :request do
     end
 
     context 'with invalid parameters' do
-      let(:invalid_reservation_data) { { user_id: @user.id, experience_id: @experience.id, date: '',  city: ''} }
+      let(:invalid_reservation_data) { { user_id: @user.id, experience_id: @experience.id, date: '', city: '' } }
 
       it 'responds with an unprocessable entity status: 422' do
         post "/api/v1/users/#{@user.id}/reservations", params: invalid_reservation_data.to_json
@@ -52,7 +54,7 @@ RSpec.describe 'Reservations', type: :request do
   describe 'DELETE /api/v1/users/:user_id/reservations/:id' do
     before do
       user = FactoryBot.create(:user)
-      reservations = FactoryBot.create_list(:reservation, 2, user: user)
+      reservations = FactoryBot.create_list(:reservation, 2, user:)
       @deleted_reservation = reservations[0]
       delete "/api/v1/users/#{user.id}/reservations/#{@deleted_reservation.id}"
     end

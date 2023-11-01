@@ -15,17 +15,17 @@ RSpec.describe Reservation, type: :model do
     end
   end
 
-  describe "Validations" do
-    it "it is valid if all its attributes are present" do
+  describe 'Validations' do
+    it 'it is valid if all its attributes are present' do
       expect(@reservation).to be_valid
     end
-  
-    it "it is not valid without a date" do
+
+    it 'it is not valid without a date' do
       @reservation.date = nil
       expect(@reservation).to_not be_valid
     end
 
-    it "it is not valid without a city" do
+    it 'it is not valid without a city' do
       @reservation.city = nil
       expect(@reservation).to_not be_valid
     end

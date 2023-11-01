@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :experience do 
+  factory :experience do
     name { Faker::Food.dish }
     description { Faker::Food.description }
     experience_fee { Faker::Number.decimal(l_digits: 3, r_digits: 3) }

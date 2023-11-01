@@ -47,7 +47,7 @@ RSpec.describe 'Users', type: :request do
       end
     end
 
-    context 'with valid parameters' do
+    context 'with invalid parameters' do
       let(:invalid_user_data) { { name: 'Lucas', username: '' } }
 
       it 'responds with an unprocessable entity status: 422' do
@@ -57,4 +57,3 @@ RSpec.describe 'Users', type: :request do
     end
   end
 end
-
