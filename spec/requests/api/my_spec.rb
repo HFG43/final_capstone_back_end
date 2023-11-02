@@ -63,7 +63,7 @@ describe 'Book an Appointment API' do
 
   path '/api/v1/users/{user_id}/reservations' do
 
-    get 'Retrieves all reservations from an user' do
+    get 'Retrieves all Reservations from an User' do
       tags 'Reservations'
       produces 'application/json'
       parameter name: :user_id, in: :path, type: :string
@@ -86,7 +86,7 @@ describe 'Book an Appointment API' do
       end
     end
 
-    post 'Creates a reservation for a user' do
+    post 'Creates a Reservation for an User' do
       tags 'Reservations'
       consumes 'application/json'
       parameter name: :user_id, in: :path, type: :string
@@ -114,7 +114,7 @@ describe 'Book an Appointment API' do
 
   path '/api/v1/users/{user_id}/reservations/{id}' do
 
-    delete 'Deletes an user reservation' do
+    delete 'Deletes an user Reservation' do
       tags 'Reservations'
       produces 'application/json'
       parameter name: :user_id, in: :path, type: :string
@@ -141,7 +141,7 @@ describe 'Book an Appointment API' do
 
   path '/api/v1/users' do
 
-    post 'Creates a new user' do
+    post 'Creates a new User' do
       tags 'Users'
       consumes 'application/json'
       parameter name: :user, in: :body, schema: {
@@ -161,12 +161,12 @@ describe 'Book an Appointment API' do
     end
   end
 
-  path '/api/v1/users/{id}' do
+  path '/api/v1/users/{username}' do
 
     get 'Retrieves an specific User' do
       tags 'Users'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string
+      parameter name: :username, in: :path, type: :string
       
       response '200', 'User found' do
         schema type: :objetc,
@@ -178,12 +178,12 @@ describe 'Book an Appointment API' do
           },
           required: [ 'exist', 'id', 'name', 'username']
       
-        let(:id) { User.create(name: 'Name', username: 'UsernameNew').username }
+        let(:username) { User.create(name: 'Name', username: 'UsernameNew').username }
         run_test!
       end
 
       response '500', 'user not found' do
-        let(:id) { 'invalid' }
+        let(:username) { 'invalid' }
         run_test!
       end
     end
