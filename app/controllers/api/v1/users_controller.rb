@@ -2,9 +2,9 @@ class Api::V1::UsersController < ApplicationController
   def show
     user = User.find_by(username: params[:id])
     if user.nil?
-      render json: { exist: false }
+      render json: { exist: false }, status: 500
     else
-      render json: { exist: true, id:user.id, name: user.name, username: user.username }
+      render json: { exist: true, id: user.id, name: user.name, username: user.username }
     end
   end
 

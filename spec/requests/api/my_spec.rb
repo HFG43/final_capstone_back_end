@@ -86,7 +86,7 @@ describe 'Book an Appointment API' do
       end
     end
 
-    post 'Retrieves all reservations from an user' do
+    post 'Creates a reservation for a user' do
       tags 'Reservations'
       consumes 'application/json'
       parameter name: :user_id, in: :path, type: :string
@@ -135,6 +135,56 @@ describe 'Book an Appointment API' do
           let(:user_id) { User.create!(id: 1, name: 'name', username: 'username').id }
           let(:id) { Reservation.create!(id: 1, user_id: 1, experience_id: experience.id, date: '2023-11-01', city: 'Tandil').id }
           run_test!
+      end
+    end
+  end
+
+  path '/api/v1/users' do
+
+    post 'Creates a new user' do
+      tags 'Users'
+      consumes 'application/json'
+      parameter name: :user, in: :body, schema: {
+        type: :object,
+        properties: {
+            id: { type: :integer },
+            name: { type: :string},
+            username: { type: :string}            
+          },
+          required: [ 'id', 'name', 'username' ]
+        }
+
+        response '201', 'user created' do
+          let(:user) { { name: 'Name', username: 'Username'} }       
+          run_test!
+      end
+    end
+  end
+
+  path '/api/v1/users/{id}' do
+
+    get 'Retrieves an specific User' do
+      tags 'Users'
+      produces 'application/json'
+      parameter name: :id, in: :path, type: :string
+      
+      response '200', 'User found' do
+        schema type: :objetc,
+          properties: {
+            exist: { type: :boolean },
+            id: { type: :integer },
+            name: { type: :string },
+            username: { type: :string }
+          },
+          required: [ 'exist', 'id', 'name', 'username']
+      
+        let(:id) { User.create(name: 'Name', username: 'UsernameNew').username }
+        run_test!
+      end
+
+      response '500', 'user not found' do
+        let(:id) { 'invalid' }
+        run_test!
       end
     end
   end  
