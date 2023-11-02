@@ -1,6 +1,6 @@
 class Api::V1::ReservationsController < ApplicationController
   def index
-    reservations = Reservation.where(users_id: params[:user_id])
+    reservations = Reservation.where(user_id: params[:user_id])
     render json: reservations
   end
 
