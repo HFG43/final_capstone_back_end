@@ -27,14 +27,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_30_195316) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.bigint "users_id", null: false
-    t.bigint "experiences_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "experience_id", null: false
     t.datetime "date", null: false
     t.string "city", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["experiences_id"], name: "index_reservations_on_experiences_id"
-    t.index ["users_id"], name: "index_reservations_on_users_id"
+    t.index ["experience_id"], name: "index_reservations_on_experience_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,6 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_30_195316) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "reservations", "experiences", column: "experiences_id"
-  add_foreign_key "reservations", "users", column: "users_id"
+  add_foreign_key "reservations", "experiences"
+  add_foreign_key "reservations", "users"
 end
