@@ -60,4 +60,82 @@ describe 'Book an Appointment API' do
 
     end
   end
+
+  path '/api/v1/users/{user_id}/reservations' do
+
+    get 'Retrieves all reservations from an user' do
+      tags 'Reservations'
+      produces 'application/json'
+      parameter name: :user_id, in: :path, type: :string
+      parameter name: :reservation, in: :body
+
+      response '200', 'Reservations found' do
+        schema type: :array,
+          properties: {
+            id: { type: :integer },
+            user_id: { type: :integer},
+            experience_id: { type: :integer},
+            date: { type: :datetime },
+            city: { type: :string }
+          },
+          required: [ 'id', 'user_id', 'experience_id', 'date', 'city' ]
+
+          let(:user_id) { '1' }
+          let(:reservation) { Reservation.create(:reservation, user_id: user_id) }
+          run_test!
+      end
+    end
+
+    post 'Retrieves all reservations from an user' do
+      tags 'Reservations'
+      consumes 'application/json'
+      parameter name: :user_id, in: :path, type: :string
+      parameter name: :reservation, in: :body, schema: {
+        type: :object,
+        properties: {
+            id: { type: :integer },
+            user_id: { type: :integer},
+            experience_id: { type: :integer},
+            date: { type: :datetime },
+            city: { type: :string }
+          },
+          required: [ 'id', 'user_id', 'experience_id', 'date', 'city' ]
+        }
+
+        response '201', 'reservation created' do
+          let(:user) { User.create(name: 'Test name', username: 'Teste Username') }
+          let(:user_id) { user.id }
+          let(:experience) { Experience.create(name: 'Caracas Gourmet', description: 'Enjoy the best cheese cachapas in Venezuela, on hands of the most creative Chef, Carmen', image: 'https:/test.jpg', experience_fee: 45, add_testing_fee: 10.5, reserve_full_table: 20, guests: 2)}
+          let(:reservation) { { user_id: user.id, experience_id: experience.id, date: '2023-11-02', city: 'Bariloche' } }
+          run_test!
+      end
+    end
+  end
+
+  path '/api/v1/users/{user_id}/reservations/{id}' do
+
+    delete 'Deletes an user reservation' do
+      tags 'Reservations'
+      produces 'application/json'
+      parameter name: :user_id, in: :path, type: :string
+      parameter name: :id, in: :path, type: :string
+
+      response '200', 'Reservations found' do
+        schema type: :object,
+          properties: {
+            id: { type: :integer },
+            user_id: { type: :integer},
+            experience_id: { type: :integer},
+            date: { type: :datetime },
+            city: { type: :string }
+          },
+          required: [ 'id', 'user_id', 'experience_id', 'date', 'city' ]
+
+          let(:experience) { Experience.create(name: 'Caracas Gourmet', description: 'Enjoy the best cheese cachapas in Venezuela, on hands of the most creative Chef, Carmen', image: 'https:/test.jpg', experience_fee: 45, add_testing_fee: 10.5, reserve_full_table: 20, guests: 2)}
+          let(:user_id) { User.create!(id: 1, name: 'name', username: 'username').id }
+          let(:id) { Reservation.create!(id: 1, user_id: 1, experience_id: experience.id, date: '2023-11-01', city: 'Tandil').id }
+          run_test!
+      end
+    end
+  end  
 end
