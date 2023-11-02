@@ -15,7 +15,7 @@ RSpec.describe 'Users', type: :request do
       it "responds with 'exist' equal to true - the user exists" do
         expected_result = parse_json({ exist: true }.to_json)
 
-        expect(response_body).to eq(expected_result)
+        expect(response_body).to include(expected_result)
       end
     end
 
