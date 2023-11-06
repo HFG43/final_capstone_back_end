@@ -24,7 +24,7 @@ describe 'Book an Appointment API' do
         let(:id) do
           Experience.create(name: 'Gourmet night', description: 'Incredible mexican spicy dinner for two!!',
                             image: 'urldetest', experience_fee: 25.5, add_testing_fee: 12, reserve_full_table: 50,
-                            guests: 2).id
+                            guests: 2, details: '2 drinks, 1 desert of your choice').id
         end
         run_test!
       end
@@ -52,7 +52,7 @@ describe 'Book an Appointment API' do
           Experience.create(
             name: 'Caracas Gourmet', description: 'Enjoy the best cheese cachapas in Venezuela!!',
             image: 'https:/test.jpg', experience_fee: 45, add_testing_fee: 10.5, reserve_full_table: 20,
-            guests: 2
+            guests: 2, details: '2 drinks, 1 desert of your choice'
           ).id
         end
         run_test!
@@ -113,7 +113,7 @@ describe 'Book an Appointment API' do
         let(:experience) do
           Experience.create(name: 'Caracas Gourmet', description: 'Enjoy the best cheese cachapas in Venezuela!!',
                             image: 'https:/test.jpg', experience_fee: 45, add_testing_fee: 10.5, reserve_full_table: 20,
-                            guests: 2)
+                            guests: 2, details: '2 drinks, 1 desert of your choice')
         end
         let(:reservation) do
           { user_id: user.id, experience_id: experience.id, date: '2023-11-02', city: 'Bariloche' }
@@ -144,7 +144,7 @@ describe 'Book an Appointment API' do
         let(:experience) do
           Experience.create(name: 'Caracas Gourmet', description: 'Enjoy the best cheese cachapas in Venezuela!!',
                             image: 'https:/test.jpg', experience_fee: 45, add_testing_fee: 10.5, reserve_full_table: 20,
-                            guests: 2)
+                            guests: 2, details: '2 drinks, 1 desert of your choice')
         end
         let(:user_id) { User.create!(id: 1, name: 'name', username: 'username').id }
         let(:id) do
