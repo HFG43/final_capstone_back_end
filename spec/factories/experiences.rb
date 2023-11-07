@@ -7,5 +7,6 @@ FactoryBot.define do
     reserve_full_table { Faker::Number.decimal(l_digits: 3, r_digits: 3) }
     guests { Faker::Number.within(range: 1..10) }
     image { Faker::LoremFlickr.image }
+    details { Faker::Lorem.sentence }
   end
 end
