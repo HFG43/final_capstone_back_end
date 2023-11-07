@@ -55,7 +55,7 @@ Experience.create(
   add_testing_fee: 5.18,
   reserve_full_table: 6.91,
   guests: 2,
-  image: 'https://i.postimg.cc/fbbdtmwL/la-cabrera-pilar.jpg',
+  image: 'https://i.postimg.cc/DZJb5h43/cofi-jaus.jpg',
   details: '2 coffees of your choice; 2 orange juices; 1 toasted sirloin and cheddar; 1 serving of pudding; 1 roll or chipá.'
 );
 Experience.create(

@@ -32,7 +32,7 @@
 
 # About <a name="about-project"></a>
 
-**"Final Capstone Back-End"** is an API for saving records of different users, displaying different experiences, and also allowing the registered users to book or cancel an experience. It is made with Ruby on Rails and PostgreSQL.
+**"Final Capstone Back-End"** is an API designed to host various gastronomic experiences, user records, and user reservations for different experiences. The allowed actions in this app are to create a new user, create, delete, and get reservations as well as get experiences. It was designed in Ruby on Rails and PostgreSQL.
 
 ---
 
