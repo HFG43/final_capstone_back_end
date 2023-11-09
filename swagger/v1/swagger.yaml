@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
+  title: Gourmet experiences API V1
   version: v1
 paths:
   "/api/v1/experiences":
@@ -34,7 +34,7 @@ paths:
                   guests:
                     type: integer
                   details:
-                    type: sting
+                    type: text
                 required:
                 - id
                 - name
@@ -75,7 +75,7 @@ paths:
                 image:
                   type: string
                 details:
-                  type: sting
+                  type: text
               required:
               - id
               - name
@@ -167,7 +167,7 @@ paths:
                   image:
                     type: string
                   details:
-                    type: sting
+                    type: text
                 required:
                 - id
                 - name

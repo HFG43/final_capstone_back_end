@@ -17,7 +17,7 @@ describe 'Book an Appointment API' do
                  add_testing_fee: { type: :decimal },
                  reserve_full_table: { type: :decimal },
                  guests: { type: :integer },
-                 details: { type: :sting }
+                 details: { type: :text }
                },
                required: %w[id name description image experience_fee add_testing_fee reserve_full_table
                             guests]
@@ -47,7 +47,7 @@ describe 'Book an Appointment API' do
           reserve_full_table: { type: :decimal },
           guests: { type: :integer },
           image: { type: :string },
-          details: { type: :sting }
+          details: { type: :text }
         },
         required: %w[id name description experience_fee add_testing_fee reserve_full_table guests image details]
       }
@@ -114,7 +114,7 @@ describe 'Book an Appointment API' do
                  reserve_full_table: { type: :decimal },
                  guests: { type: :integer },
                  image: { type: :string },
-                 details: { type: :sting }
+                 details: { type: :text }
                },
                required: %w[id name description experience_fee add_testing_fee reserve_full_table guests image details]
 
