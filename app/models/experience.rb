@@ -1,6 +1,6 @@
 class Experience < ApplicationRecord
   # Associations.
-  has_many :reservations, class_name: 'Reservation', foreign_key: 'experiences_id', dependent: :destroy
+  has_many :reservations, class_name: 'Reservation', foreign_key: 'experience_id', dependent: :destroy
 
   # Validations.
   validates :name, :description, :image, :experience_fee, :add_testing_fee, :reserve_full_table, :guests, presence: true

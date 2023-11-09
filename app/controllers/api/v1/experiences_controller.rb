@@ -25,7 +25,8 @@ class Api::V1::ExperiencesController < ApplicationController
     image = json_request['image']
     details = json_request['details']
 
-    new_experience = Experiences.new(name:, description:, experience_fee:, add_testing_fee:, reserve_full_table:, guests:, image:, details:)
+    new_experience = Experience.new(name:, description:, experience_fee:, add_testing_fee:,
+                                    reserve_full_table:, guests:, image:, details:)
 
     if new_experience.save
       render json: new_experience, status: :created
@@ -35,8 +36,8 @@ class Api::V1::ExperiencesController < ApplicationController
   end
 
   def destroy
-    experience = Experiences.find(params[:id])
-    
+    experience = Experience.find(params[:id])
+
     if experience.destroy
       render json: experience
     else
