@@ -348,7 +348,7 @@ paths:
         '500':
           description: user not found
 servers:
-- url: http://localhost:3000
+- url: https://gourmet-experiences.onrender.com
   variables:
     defaultHost:
-      default: localhost:3000
+      default: gourmet-experiences.onrender.com
