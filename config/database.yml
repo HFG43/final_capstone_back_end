@@ -80,7 +80,5 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: final_capstone_back_end_production
-  username: final_capstone_back_end
-  password: <%= ENV["FINAL_CAPSTONE_BACK_END_DATABASE_PASSWORD"] %>
+ <<: *default
+ url: <%= ENV['DATABASE_URL'] %>
