@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
+  title: Gourmet experiences API V1
   version: v1
 paths:
   "/api/v1/experiences":
@@ -33,6 +33,8 @@ paths:
                     type: decimal
                   guests:
                     type: integer
+                  details:
+                    type: text
                 required:
                 - id
                 - name
@@ -42,6 +44,48 @@ paths:
                 - add_testing_fee
                 - reserve_full_table
                 - guests
+    post:
+      summary: Create a new experience
+      tags:
+      - Experiences
+      parameters: []
+      responses:
+        '201':
+          description: experience created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                description:
+                  type: string
+                experience_fee:
+                  type: decimal
+                add_testing_fee:
+                  type: decimal
+                reserve_full_table:
+                  type: decimal
+                guests:
+                  type: integer
+                image:
+                  type: string
+                details:
+                  type: text
+              required:
+              - id
+              - name
+              - description
+              - experience_fee
+              - add_testing_fee
+              - reserve_full_table
+              - guests
+              - image
+              - details
   "/api/v1/experiences/{id}":
     get:
       summary: Retrieves an specific Experience
@@ -88,6 +132,52 @@ paths:
                 - guests
         '500':
           description: Record not found
+    delete:
+      summary: Delete an experience
+      tags:
+      - Experiences
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Experience deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  experience_fee:
+                    type: decimal
+                  add_testing_fee:
+                    type: decimal
+                  reserve_full_table:
+                    type: decimal
+                  guests:
+                    type: integer
+                  image:
+                    type: string
+                  details:
+                    type: text
+                required:
+                - id
+                - name
+                - description
+                - experience_fee
+                - add_testing_fee
+                - reserve_full_table
+                - guests
+                - image
+                - details
   "/api/v1/users/{user_id}/reservations":
     get:
       summary: Retrieves all Reservations from an User

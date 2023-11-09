@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   #API endpoints
   namespace :api do
     namespace :v1 do
-      resources :experiences, only: [:index, :show]
+      resources :experiences, only: [:index, :show, :create, :destroy]
       resources :users, only: [:show, :create] do
         resources :reservations, only: [:index, :create, :destroy]
       end

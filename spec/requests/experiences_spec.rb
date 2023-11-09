@@ -53,4 +53,57 @@ RSpec.describe 'Experiences', type: :request do
       end
     end
   end
+
+  describe 'POST /api/v1/experiences' do
+    context 'Create a valid experience' do
+      let(:valid_experience) do
+        {
+          name: 'Thibon Coffee',
+          description: 'A remarkable coffee with a lot of history.',
+          experience_fee: 34.57,
+          add_testing_fee: 5.18,
+          reserve_full_table: 6.91,
+          guests: 2,
+          image: 'https://i.postimg.cc/HkdXmFRb/cafe-thibon.jpg',
+          details: '2 coffees of your choice; 1 toasted sirloin and cheddar'
+        }
+      end
+
+      it 'respond with a create status' do
+        post '/api/v1/experiences', params: valid_experience.to_json
+        expect(response).to have_http_status(:created)
+      end
+    end
+
+    context 'Create a experience with invalid parameters' do
+      let(:invalid_experience) do
+        {
+          name: 'Thibon Coffee',
+          description: '',
+          experience_fee: 34.57,
+          add_testing_fee: 5.18,
+          reserve_full_table: 6.91,
+          guests: 2,
+          image: 'https://i.postimg.cc/HkdXmFRb/cafe-thibon.jpg',
+          details: '2 coffees of your choice; 1 toasted sirloin and cheddar'
+        }
+      end
+
+      it 'respond with a create status' do
+        post '/api/v1/experiences', params: invalid_experience.to_json
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
+  describe 'DELETE /api/v1/experiences/:id' do
+    before do
+      @experience = FactoryBot.create(:experience)
+    end
+
+    it 'responds with ok estatus' do
+      delete "/api/v1/experiences/#{@experience.id}"
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

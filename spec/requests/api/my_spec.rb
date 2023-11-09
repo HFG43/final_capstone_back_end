@@ -16,7 +16,8 @@ describe 'Book an Appointment API' do
                  experience_fee: { type: :decimal },
                  add_testing_fee: { type: :decimal },
                  reserve_full_table: { type: :decimal },
-                 guests: { type: :integer }
+                 guests: { type: :integer },
+                 details: { type: :text }
                },
                required: %w[id name description image experience_fee add_testing_fee reserve_full_table
                             guests]
@@ -25,6 +26,37 @@ describe 'Book an Appointment API' do
           Experience.create(name: 'Gourmet night', description: 'Incredible mexican spicy dinner for two!!',
                             image: 'urldetest', experience_fee: 25.5, add_testing_fee: 12, reserve_full_table: 50,
                             guests: 2, details: '2 drinks, 1 desert of your choice').id
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/experiences' do
+    post 'Create a new experience' do
+      tags 'Experiences'
+      consumes 'application/json'
+      parameter name: :experience, in: :body, schema: {
+        type: :object,
+        properties: {
+          id: { type: :integer },
+          name: { type: :string },
+          description: { type: :string },
+          experience_fee: { type: :decimal },
+          add_testing_fee: { type: :decimal },
+          reserve_full_table: { type: :decimal },
+          guests: { type: :integer },
+          image: { type: :string },
+          details: { type: :text }
+        },
+        required: %w[id name description experience_fee add_testing_fee reserve_full_table guests image details]
+      }
+
+      response '201', 'experience created' do
+        let(:experience) do
+          Experience.create(name: 'Caracas Gourmet', description: 'Enjoy the best cheese cachapas in Venezuela!!',
+                            image: 'https:/test.jpg', experience_fee: 45, add_testing_fee: 10.5, reserve_full_table: 20,
+                            guests: 2, details: '2 drinks, 1 desert of your choice')
         end
         run_test!
       end
@@ -60,6 +92,39 @@ describe 'Book an Appointment API' do
 
       response '500', 'Record not found' do
         let(:id) { 'invalid' }
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/experiences/{id}' do
+    delete 'Delete an experience' do
+      tags 'Experiences'
+      produces 'application/json'
+      parameter name: :id, in: :path, type: :string
+
+      response '200', 'Experience deleted successfully' do
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 description: { type: :string },
+                 experience_fee: { type: :decimal },
+                 add_testing_fee: { type: :decimal },
+                 reserve_full_table: { type: :decimal },
+                 guests: { type: :integer },
+                 image: { type: :string },
+                 details: { type: :text }
+               },
+               required: %w[id name description experience_fee add_testing_fee reserve_full_table guests image details]
+
+        let(:id) do
+          Experience.create(id: 1, name: 'Caracas Gourmet',
+                            description: 'Enjoy the best cheese cachapas in Venezuela!!', image: 'https:/test.jpg',
+                            experience_fee: 45, add_testing_fee: 10.5, reserve_full_table: 20, guests: 2,
+                            details: '2 drinks, 1 desert of your choice').id
+        end
+
         run_test!
       end
     end
